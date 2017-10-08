@@ -30,6 +30,6 @@ export class AbstractServices {
   getConfigKey() {}
   
   enable = () => {
-    this.config.update('enabled', true)
+    this.config.update('enabled', true, true)
   }
 }

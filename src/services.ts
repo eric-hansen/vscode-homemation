@@ -28,4 +28,8 @@ export class AbstractServices {
    * I.e.: 'philips_hue' for the Philips Hue devices
    */
   getConfigKey() {}
+  
+  enable = () => {
+    this.config.update('enabled', true)
+  }
 }

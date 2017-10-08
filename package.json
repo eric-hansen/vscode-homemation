@@ -1,0 +1,95 @@
+{
+  "name": "homemation",
+  "displayName": "homemation",
+  "description": "Home automation silly extension",
+  "version": "1.0.0",
+  "publisher": "raevinfaith",
+  "engines": {
+    "vscode": "^1.17.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:homemation.hubs.philips_hue.findAllAvailableBridges",
+    "onCommand:homemation.hubs.philips_hue.getHueVersion",
+    "onCommand:homemation.hubs.philips_hue.getLights"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "homemation.hubs.philips_hue.findAllAvailableBridges",
+        "title": "Homemation [Hubs: Philips Hue] - Find and set bridge"
+      },
+      {
+        "command": "homemation.hubs.philips_hue.getHueVersion",
+        "title": "Homemation [Hubs: Philips Hue] - Get API & software version info"
+      },
+      {
+        "command": "homemation.hubs.philips_hue.getLights",
+        "title": "Homemation [Hubs: Philips Hue] Get and store all lights associated with the hub"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "Homemation",
+        "properties": {
+          "homemation.hubs.philips_hue.enabled": {
+            "type":"boolean",
+            "default":false
+          },
+          "homemation.hubs.philips_hue.ip": {
+            "type": "string",
+            "default": "",
+            "description": "IP address of Philips Hue hub to use"
+          },
+          "homemation.hubs.philips_hue.user": {
+            "type": "string",
+            "default": "",
+            "description": "Provided username for authenticated actions"
+          },
+          "homemation.hubs.philips_hue.lights": {
+            "type":"array",
+            "title": "Array of lights connected to hub",
+            "items": {
+              "type":"object",
+              "title": "Hue-compatible light",
+              "properties": {
+                "id": {
+                  "type":"integer",
+                  "description": "ID of light (need for any actions done on it)"
+                },
+                "reachable": {
+                  "type":"boolean",
+                  "description": "If bulb is reachable by hub or not"
+                },
+                "name": {
+                  "type":"string",
+                  "description": "Human-readable form of bulb info"
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.3",
+    "vscode": "^1.1.5",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "node-hue-api": "^2.4.2"
+  }
+}
